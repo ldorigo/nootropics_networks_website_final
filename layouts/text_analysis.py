@@ -1,30 +1,15 @@
 from typing import Literal
 import dash_core_components as dcc
-from dash_core_components.Dropdown import Dropdown
-from dash_core_components.Loading import Loading
 import dash_html_components as html
-from dash_html_components.Hr import Hr
-from networkx.algorithms.shortest_paths.generic import shortest_path
-from nltk.util import usage
 from plotly.subplots import make_subplots
-import assets.texts as texts
 import dash_bootstrap_components as dbc
-from utils.utils import make_table_from_items
 from dash.dependencies import Input, Output
-from project.library_functions import (
-    get_name_by,
-    get_top,
-    get_top_posts,
-)
 from app import app
-from project.library_functions.config import Config
 import urllib
 import networkx as nx
-import plotly.express as px
 import plotly.graph_objects as go
 from utils.data import (
     graph_reddit_gcc,
-    all_names_and_synonyms,
     synonym_mapping,
     names_and_synonyms_in_reddit,
 )

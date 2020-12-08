@@ -1,19 +1,14 @@
 from typing import Dict, List
 
-import assets.texts as texts
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_cytoscape as cyto
 import dash_html_components as html
-import networkx as nx
-import numpy as np
-import wojciech as w
 from app import app
 from dash.dependencies import Input, Output
 from project.library_functions import (
     draw_overlaps_plotly,
 )
-from project.library_functions.config import Config
 
 from utils.community_graphs import build_cytoscape_elements, make_stylesheet
 

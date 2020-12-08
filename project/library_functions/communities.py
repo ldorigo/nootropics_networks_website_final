@@ -177,7 +177,7 @@ def assign_root_categories(
     for node in graph.nodes:
         graph.nodes[node][name] = []
 
-        for category in names_to_categories[node]:
+        for category in names_to_categories[node.lower()]:
             if category in inverse_mapping:
                 graph.nodes[node][name].append(inverse_mapping[category])
 
