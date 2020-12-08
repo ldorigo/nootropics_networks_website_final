@@ -139,7 +139,7 @@ def reddit_substance(substance_name):
     n_links = graph_reddit_gcc.degree(name)
     total_length = sum([len(i) for i in nodedata["contents"]])
     edge_counts = sorted(
-        graph_reddit_gcc.edges("caffeine", data="count"),
+        graph_reddit_gcc.edges(name, data="count"),
         key=lambda x: x[2],
         reverse=True,
     )

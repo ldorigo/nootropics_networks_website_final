@@ -23,7 +23,7 @@ graph_reddit = create_graph_reddit(
 )
 
 graph_wiki_directed = create_graph_wiki()
-graph_wiki = graph_wiki_directed.to_undirected()
+graph_wiki = w.graph.largest_connected_component(graph_wiki_directed.to_undirected())
 graph_reddit_gcc = w.graph.largest_connected_component(graph_reddit)
 
 

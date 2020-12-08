@@ -1,4 +1,5 @@
 import dash_core_components as dcc
+from dash_core_components.Loading import Loading
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from utils.utils import make_table_from_items
@@ -11,9 +12,7 @@ from project.library_functions import (
     get_reddit_plots_figure,
 )
 from app import app
-from utils.data import (
-    all_names_and_synonyms,
-)
+from utils.data import all_names_and_synonyms, names_and_synonyms_in_reddit
 from utils.preliminary import wiki_page, reddit_substance
 
 wiki_preliminary_plots = get_wiki_plots_figure()
@@ -49,8 +48,12 @@ preliminary_layout = html.Div(
                         "(Hint: click one of the bins above to learn more)",
                         className="card-subtitle text-muted my-3",
                     ),
-                    html.Div(
-                        "", className="card-text", id="wiki_preliminary_plots_learnmore"
+                    dcc.Loading(
+                        html.Div(
+                            "",
+                            className="card-text",
+                            id="wiki_preliminary_plots_learnmore",
+                        ),
                     ),
                 ]
             ),
@@ -90,7 +93,7 @@ preliminary_layout = html.Div(
                                 ],
                                 className="my-3",
                             ),
-                            dbc.Row(id="wikipage_preview", children=[]),
+                            dcc.Loading(dbc.Row(id="wikipage_preview", children=[])),
                         ]
                     ),
                 ]
@@ -128,10 +131,12 @@ preliminary_layout = html.Div(
                         "(Hint: click one of the bins above to learn more)",
                         className="card-subtitle text-muted my-3",
                     ),
-                    html.Div(
-                        "",
-                        className="card-text",
-                        id="reddit_preliminary_plots_learnmore",
+                    dcc.Loading(
+                        html.Div(
+                            "",
+                            className="card-text",
+                            id="reddit_preliminary_plots_learnmore",
+                        )
                     ),
                 ]
             ),
@@ -140,7 +145,8 @@ preliminary_layout = html.Div(
         html.P(
             "In order to analyze the posts we got from reddit, we had to find as many mentions of nootropics in those posts as possible.\
                 If you're interested in learning more about how we did, feel free to check our notebook - the link is on the homepage.\
-            This allowed us to get, for each substance, a list of all posts that metion it. Once more, you can look at the data for any substance you like below."
+            This allowed us to get, for each substance, a list of all posts that metion it. Once more, you can look at the data for any substance you like below.",
+            className="mt-5",
         ),
         dbc.Card(
             dbc.CardBody(
@@ -164,7 +170,7 @@ preliminary_layout = html.Div(
                                             id="reddit_substance_select_dropdown",
                                             options=[
                                                 {"label": i.title(), "value": i}
-                                                for i in all_names_and_synonyms
+                                                for i in names_and_synonyms_in_reddit
                                             ],
                                             value="caffeine",
                                             placeholder="Phenibut, caffeine, modafinil, ...",
@@ -174,7 +180,9 @@ preliminary_layout = html.Div(
                                 ],
                                 className="my-3",
                             ),
-                            dbc.Row(id="reddit_substance_preview", children=[]),
+                            dcc.Loading(
+                                dbc.Row(id="reddit_substance_preview", children=[])
+                            ),
                         ]
                     ),
                 ]

@@ -35,7 +35,7 @@ def load_data_wiki():
         wiki_data["links"].append(
             {key.lower(): value for key, value in data["links"].items()}
         )
-        wiki_data["synonyms"].append(["redirects"])
+        wiki_data["synonyms"].append(data["redirects"])
 
         wiki_data["url"].append(data["url"])
 

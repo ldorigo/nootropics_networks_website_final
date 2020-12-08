@@ -268,6 +268,7 @@ homepage_layout = html.Div(
             [
                 "At the same time, from a sligthly more theoretical and network-science point-of-view, we are interested in investigating the ",
                 html.Em("networks "),
+                """  """
                 'that can be extracted from both sources: In both cases, the nodes of the network are nootropics. In the case of WikiPedia, we build the network by \
                 considering "links" to be a link between two pages about two nootropics. In the case of Reddit, a "link" arises whenever two substances are mentionned together within a post. \
                     How do the resulting networks look like and why?',
@@ -281,7 +282,7 @@ homepage_layout = html.Div(
         ),
         dbc.Container(dbc.Row([dbc.Col(reddit_table), dbc.Col(wiki_table)])),
         html.Hr(className="my-5"),
-        html.H2("Links and References"),
+        html.H2("Links and References", className="mb-5"),
         linkref_container,
     ]
 )

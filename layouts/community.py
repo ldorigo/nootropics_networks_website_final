@@ -102,16 +102,30 @@ hist2d_louvain_2_vs_mechanisms = draw_overlaps_plotly(
 )
 
 hist2d_louvain_reddit_vs_effects = draw_overlaps_plotly(
-    "louvain_community_reddit_L0",
+    "louvain_community_reddit_R1.00_L0",
     "effect_category",
     graph_reddit_gcc,
     saved="hist2d_louvain_reddit_vs_effects",
 )
 hist2d_louvain_reddit_vs_mechanisms = draw_overlaps_plotly(
-    "louvain_community_reddit_L0",
+    "louvain_community_reddit_R1.00_L0",
     "mechanism_category",
     graph_reddit_gcc,
     saved="hist2d_louvain_reddit_vs_mechanisms",
+)
+
+
+hist2d_louvain_reddit_fine_vs_effects = draw_overlaps_plotly(
+    "louvain_community_reddit_R0.60_L0",
+    "effect_category",
+    graph_reddit_gcc,
+    saved="hist2d_louvain_reddit_fine_vs_mechanisms",
+)
+hist2d_louvain_reddit_fine_vs_mechanisms = draw_overlaps_plotly(
+    "louvain_community_reddit_R0.60_L0",
+    "mechanism_category",
+    graph_reddit_gcc,
+    saved="hist2d_louvain_reddit_fine_vs_effects",
 )
 ####################################
 ############ Layout elements #####
@@ -143,176 +157,189 @@ community_layout = html.Div(
         dbc.Container(
             children=[
                 dbc.Row(
-                    [
-                        dbc.Col(cyto_graph_wiki, width=9),
-                        dbc.Col(
-                            children=[
-                                dbc.FormGroup(
-                                    [
-                                        dbc.Label(
-                                            "Color nodes by:",
-                                        ),
-                                        dbc.Select(
-                                            id="select_root_category_wiki",
-                                            options=[
-                                                {
-                                                    "label": "None",
-                                                    "value": "none",
-                                                },
-                                                {
-                                                    "label": "Wikipedia Categories",
-                                                    "value": "wikicats",
-                                                    "disabled": True,
-                                                },
-                                                {
-                                                    "label": "Mechanism of Action",
-                                                    "value": "mechanism",
-                                                },
-                                                {
-                                                    "label": "Psychological Effect",
-                                                    "value": "effect",
-                                                },
-                                                {
-                                                    "label": "Autodetected Communities",
-                                                    "value": "auto",
-                                                    "disabled": True,
-                                                },
-                                                {
-                                                    "label": "Louvain Categories - Top Level",
-                                                    "value": "louvain_1",
-                                                },
-                                            ],
-                                            value="none",
-                                        ),
-                                    ]
-                                ),
-                                dbc.Row(id="wiki_plot_legend", children=[]),
-                            ],
-                            width=3,
-                        ),
-                    ]
-                ),
-                dbc.Row(
                     dbc.Card(
                         dbc.CardBody(
-                            [
-                                html.H4("More Info", className="card-title"),
-                                html.Div(
-                                    "The network above was layed out using the ForceAtlas algorithm, which uses a physical simulation\
+                            dbc.Container(
+                                [
+                                    dbc.Row(
+                                        [
+                                            dbc.Col(cyto_graph_wiki, width=8),
+                                            dbc.Col(
+                                                children=[
+                                                    dbc.FormGroup(
+                                                        [
+                                                            dbc.Label(
+                                                                "Color nodes by:",
+                                                            ),
+                                                            dbc.Select(
+                                                                id="select_root_category_wiki",
+                                                                options=[
+                                                                    {
+                                                                        "label": "None",
+                                                                        "value": "none",
+                                                                    },
+                                                                    {
+                                                                        "label": "Wikipedia Categories",
+                                                                        "value": "wikicats",
+                                                                        "disabled": True,
+                                                                    },
+                                                                    {
+                                                                        "label": "Mechanism of Action",
+                                                                        "value": "mechanism",
+                                                                    },
+                                                                    {
+                                                                        "label": "Psychological Effect",
+                                                                        "value": "effect",
+                                                                    },
+                                                                    {
+                                                                        "label": "Autodetected Communities",
+                                                                        "value": "auto",
+                                                                        "disabled": True,
+                                                                    },
+                                                                    {
+                                                                        "label": "Louvain Categories - Top Level",
+                                                                        "value": "louvain_1",
+                                                                    },
+                                                                ],
+                                                                value="none",
+                                                            ),
+                                                        ]
+                                                    ),
+                                                    dbc.Row(
+                                                        id="wiki_plot_legend",
+                                                        children=[],
+                                                    ),
+                                                ],
+                                                width=4,
+                                            ),
+                                        ]
+                                    ),
+                                    html.Hr(className="my-3"),
+                                    html.H4("More Info", className="card-title"),
+                                    html.Div(
+                                        "The network above was layed out using the ForceAtlas algorithm, which uses a physical simulation\
                                     to spread out nodes in a way that edges act as 'elastics' and nodes as repulsors. This has the effect of \
                                     drawing densely-connected regions of the graph as clusters (many edges that attract the nodes to each other), \
                                     and to push isolated nodes or unrelated communities far from one another.\
                                     To learn more about how this clustering reflects both the actual structure of the articles and the communities that can\
                                     be determined by using network analysis algorithm, select one of the coloring schemes above.",
-                                    className="card-text",
-                                ),
-                                html.Div(
-                                    "",
-                                    className="card-text",
-                                    id="cyto_graph_wiki_info",
-                                ),
-                            ]
+                                        className="card-text",
+                                    ),
+                                    html.Div(
+                                        "",
+                                        className="card-text",
+                                        id="cyto_graph_wiki_info",
+                                    ),
+                                ]
+                            )
                         ),
                     ),
                 ),
             ]
         ),
-        html.Hr(),
+        html.Hr(className="my-5"),
         html.H4("Reddit Communities"),
         html.P(
             "Here comes one of the main questions we had when setting out to analyse our data: can we actually derive information about the underlying properties of nootropics\
             starting from just reddit discussions? The following visualization is similar to the above, except here all links are extracted by finding nootropics that are mentionned together in reddit posts.",
-            style={"margin-bottom": "12em"},
+            className="mb-5",
         ),
         dbc.Container(
             children=[
                 dbc.Row(
-                    [
-                        dbc.Col(
-                            children=[
-                                dbc.FormGroup(
-                                    [
-                                        dbc.Label(
-                                            "Select the attribute by which to color the nodes"
-                                        ),
-                                        dbc.Select(
-                                            id="select_root_category_reddit",
-                                            options=[
-                                                {
-                                                    "label": "None",
-                                                    "value": "none",
-                                                },
-                                                {
-                                                    "label": "Wikipedia Categories",
-                                                    "value": "none",
-                                                    "disabled": True,
-                                                },
-                                                {
-                                                    "label": "Mechanism of Action",
-                                                    "value": "mechanism",
-                                                },
-                                                {
-                                                    "label": "Psychological Effect",
-                                                    "value": "effect",
-                                                },
-                                                {
-                                                    "label": "Autodetected Communities (on reddit)",
-                                                    "value": "none",
-                                                    "disabled": True,
-                                                },
-                                                {
-                                                    "label": "Louvain Categories - Coarse Grained",
-                                                    "value": "louvain_reddit",
-                                                },
-                                                {
-                                                    "label": "Louvain Categories - Fine Grained",
-                                                    "value": "louvain_reddit_r07",
-                                                },
-                                            ],
-                                            value="louvain_reddit",
-                                        ),
-                                    ]
-                                ),
-                                dbc.Row(id="reddit_plot_legend", children=[]),
-                            ],
-                            width=3,
-                        ),
-                        dbc.Col(cyto_graph_reddit, width=9),
-                    ]
-                ),
-                dbc.Row(
                     dbc.Card(
                         dbc.CardBody(
                             [
-                                html.H4("More Info", className="card-title"),
-                                html.Div(
-                                    children=[
-                                        html.P(
+                                dbc.Container(
+                                    [
+                                        dbc.Row(
+                                            [
+                                                dbc.Col(
+                                                    children=[
+                                                        dbc.FormGroup(
+                                                            [
+                                                                dbc.Label(
+                                                                    "Select the attribute by which to color the nodes"
+                                                                ),
+                                                                dbc.Select(
+                                                                    id="select_root_category_reddit",
+                                                                    options=[
+                                                                        {
+                                                                            "label": "None",
+                                                                            "value": "none",
+                                                                        },
+                                                                        {
+                                                                            "label": "Wikipedia Categories",
+                                                                            "value": "none",
+                                                                            "disabled": True,
+                                                                        },
+                                                                        {
+                                                                            "label": "Mechanism of Action",
+                                                                            "value": "mechanism",
+                                                                        },
+                                                                        {
+                                                                            "label": "Psychological Effect",
+                                                                            "value": "effect",
+                                                                        },
+                                                                        {
+                                                                            "label": "Autodetected Communities (on reddit)",
+                                                                            "value": "none",
+                                                                            "disabled": True,
+                                                                        },
+                                                                        {
+                                                                            "label": "Louvain Categories - Coarse Grained",
+                                                                            "value": "louvain_reddit",
+                                                                        },
+                                                                        {
+                                                                            "label": "Louvain Categories - Fine Grained",
+                                                                            "value": "louvain_reddit_r07",
+                                                                        },
+                                                                    ],
+                                                                    value="louvain_reddit",
+                                                                ),
+                                                            ]
+                                                        ),
+                                                        dbc.Row(
+                                                            id="reddit_plot_legend",
+                                                            children=[],
+                                                        ),
+                                                    ],
+                                                    width=3,
+                                                ),
+                                                dbc.Col(cyto_graph_reddit, width=9),
+                                            ]
+                                        ),
+                                        html.H4("More Info", className="card-title"),
+                                        html.Div(
                                             children=[
-                                                "It's immediately clear that the clustering doesn't work as well in this case: most of the nodes form a big blob in the center.\
+                                                html.P(
+                                                    children=[
+                                                        "It's immediately clear that the clustering doesn't work as well in this case: most of the nodes form a big blob in the center.\
                                     There are several reasons to this, and the main one is that this graph is very densely connected - in network science terms, it's \
                                     closer to a ",
-                                                html.Em("random network"),
-                                                " than to a ",
-                                                html.Em("scale-free network"),
-                                                ' like the WikiPedia network above. While it is still possible to find "nicer" layouts than what you see above, the python \
+                                                        html.Em("random network"),
+                                                        " than to a ",
+                                                        html.Em("scale-free network"),
+                                                        ' like the WikiPedia network above. While it is still possible to find "nicer" layouts than what you see above, the python \
                                                 implementation of the force-atlas 2 algorithm is quite limited, and that is the best that we were able to do. \
                                                 Once more, you are invited to chose different coloring schemes to see the effects of automatic community detection.',
-                                            ]
-                                        )
-                                    ],
-                                    className="card-text",
-                                ),
-                                html.Hr(),
-                                html.Div(
-                                    "",
-                                    className="card-text",
-                                    id="cyto_graph_reddit_info",
+                                                    ]
+                                                )
+                                            ],
+                                            className="card-text",
+                                        ),
+                                        html.Hr(),
+                                        html.Div(
+                                            "",
+                                            className="card-text",
+                                            id="cyto_graph_reddit_info",
+                                        ),
+                                    ]
                                 ),
                             ]
                         ),
                     ),
-                ),
+                )
             ]
         ),
     ]
@@ -368,7 +395,6 @@ def display_wiki_graph_info(value):
             html.H4("Wikipedia Categories"),
             html.P(
                 children=[
-                    "The ",
                     html.A(
                         "Drugs by psychological effects",
                         href="https://en.wikipedia.org/wiki/Category:Drugs_by_psychological_effects",
@@ -405,7 +431,8 @@ def display_wiki_graph_info(value):
             dcc.Graph(figure=hist2d_louvain_1_vs_mechanisms),
             html.P(
                 children=[
-                    "There are two categories that have a sizeable overlap with the communities detected by the algorithm: ",
+                    "Because the Louvain algorithm is not deterministic, the table above will be different everytime the website gets reloaded.\
+                    When we generated it, there were two categories that had a sizeable overlap with the communities detected by the algorithm: ",
                     html.Em("GABA receptor ligands"),
                     " and ",
                     html.Em("Monoamine releasing agents"),
@@ -458,7 +485,7 @@ def show_legends_wiki(data):
                 ),
             )
 
-        children = html.Div(
+        children = dbc.Col(
             dbc.Table(
                 children=[
                     html.Thead("Legend"),
@@ -540,6 +567,29 @@ def display_reddit_graph_info(value):
             dcc.Graph(figure=hist2d_louvain_reddit_vs_effects),
             dcc.Graph(figure=hist2d_louvain_reddit_vs_mechanisms),
         ]
+
+    elif value == "louvain_reddit_r07":
+        children = [
+            html.H4("Autodetected Categories"),
+            html.P(
+                """
+                To see if it yielded better results, we tried increasing the "granularity" of the Louvain algorithm - i.e., make it generate more, but smaller communities.
+                """
+            ),
+            dcc.Graph(figure=hist2d_louvain_reddit_fine_vs_effects),
+            dcc.Graph(figure=hist2d_louvain_reddit_fine_vs_mechanisms),
+            html.P(
+                [
+                    """
+                The results are mixed: there are more of the communities that have 
+                """,
+                    html.Em(" some "),
+                    """
+                overlap, but the overlap itself is smaller.
+                """,
+                ]
+            ),
+        ]
     else:
         children = []
 
@@ -573,7 +623,7 @@ def show_legends_reddit(data):
                 ),
             )
 
-        children = html.Div(
+        children = dbc.Col(
             dbc.Table(
                 children=[
                     html.Thead("Legend"),

@@ -16,13 +16,17 @@ from utils.data import (
 
 
 def wordcloud_from_substance(substance_name: str, type: Literal["reddit", "wiki"]):
-    name = synonym_mapping[substance_name.lower()]
+    name = synonym_mapping[substance_name]
     path = f"https://nootropicsnetworks.s3.eu-north-1.amazonaws.com/wordclouds/{type}/{urllib.parse.quote_plus(name)}.png"
-    return html.Img(src=path, width="100%")
+    if type == "reddit":
+        caption = "WordCloud generated from Reddit"
+    else:
+        caption = "WordCloud generated from WikiPedia"
+    return html.Figure([html.Img(src=path, width="100%"), html.Figcaption()])
 
 
 def wordclouds_from_substance(substance_name: str):
-    name = synonym_mapping[substance_name.lower()]
+    name = synonym_mapping[substance_name]
     wc_wiki = wordcloud_from_substance(substance_name=substance_name, type="wiki")
 
     if name in set(graph_reddit_gcc.nodes()):
@@ -44,7 +48,7 @@ def wordclouds_from_substance(substance_name: str):
 
 
 def sentiment_histograms_from_substance(graph: nx.Graph, substance: str):
-    name = synonym_mapping[substance.lower()]
+    name = synonym_mapping[substance]
     polarities = graph.nodes[name]["polarity"]
     subjectivities = graph.nodes[name]["subjectivity"]
     plot = make_subplots(
@@ -56,17 +60,18 @@ def sentiment_histograms_from_substance(graph: nx.Graph, substance: str):
         ),
     )
     plot.add_trace(
-        go.Histogram(x=polarities, xbins_size=0.1),
+        go.Histogram(x=polarities, xbins_size=0.1, marker_color="#ff4401"),
         row=1,
         col=1,
     )
     plot.add_trace(
-        go.Histogram(x=subjectivities, xbins_size=0.05),
+        go.Histogram(x=subjectivities, xbins_size=0.05, marker_color="#007bd9"),
         row=2,
         col=1,
     )
     plot.update_xaxes(range=[-1, 1], row=1, col=1)
     plot.update_xaxes(range=[0, 1], row=2, col=1)
+    plot.update_layout(showlegend=False)
     return plot
 
 
@@ -130,12 +135,26 @@ text_analysis_layout = html.Div(
                 dbc.Col(
                     html.Img(
                         width="100%",
-                        src="https://nootropicsnetworks.s3.eu-north-1.amazonaws.com/wordclouds/wordcloud2.png",
-                    )
+                        src="https://nootropicsnetworks.s3.eu-north-1.amazonaws.com/wordclouds/caffeinetheaning.png",
+                    ),
+                    width={"size": 8, "offset": 2},
                 )
-            )
+            ),
+            className="my-5",
         ),
-        html.Hr(),
+        html.P(
+            [
+                "Once again, the thing that impressed us most about the results is that \
+                it was possible to find ",
+                html.Em("dosage"),
+                ' information in these wordclouds - such as "2:1" (probably the ratio of caffeine to theanine).\
+                 Despite not really being related to network science, this is perhaps the most interesting practical finding of this assignment:\
+                That it may be possible to infer statistics about the actual doses of specific substances that people take, and \
+                    possibly correlate those substances with the positivity of the outcomes.\
+                We are unfortunately lacking time to do so here, but this could be a great follow-up project.',
+            ]
+        ),
+        html.Hr(className="my-5"),
         dbc.Card(
             dbc.CardBody(
                 [
@@ -169,6 +188,7 @@ text_analysis_layout = html.Div(
                     ),
                 ]
             ),
+            className="my-5",
         ),
     ]
 )
@@ -209,7 +229,7 @@ def show_wordcloud_for_nootropic(chosen_nootropic):
         dbc.Col(
             dcc.Graph(
                 figure=sentiment_histograms_from_substance(
-                    graph_reddit, chosen_nootropic
+                    graph_reddit_gcc, chosen_nootropic
                 )
             ),
             width=12,
