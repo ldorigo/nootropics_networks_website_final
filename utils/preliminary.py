@@ -1,7 +1,7 @@
 from utils.data import (
     all_names_and_synonyms,
     synonym_mapping,
-    graph_reddit,
+    graph_reddit_gcc,
     graph_wiki_directed,
     reddit_data,
 )
@@ -108,7 +108,7 @@ def wiki_page(substance_name: str):
 
     preview_children.append(
         html.A(
-            html.H6("Click here to view the page on WikiPedia."), href=nodedata["url"]
+            html.B("Click here to view the page on WikiPedia."), href=nodedata["url"]
         )
     )
     children = [
@@ -124,7 +124,7 @@ def wiki_page(substance_name: str):
 
 def reddit_substance(substance_name):
     name = synonym_mapping[substance_name]
-    nodedata = graph_reddit.nodes[name]
+    nodedata = graph_reddit_gcc.nodes[name]
     titlechildren = []
     titlechildren.append(
         html.H5(f"Reddit Posts for: {name}".title(), className="card-title")
@@ -136,10 +136,12 @@ def reddit_substance(substance_name):
             )
         )
 
-    n_links = graph_reddit.degree(name)
+    n_links = graph_reddit_gcc.degree(name)
     total_length = sum([len(i) for i in nodedata["contents"]])
     edge_counts = sorted(
-        graph_reddit.edges("caffeine", data="count"), key=lambda x: x[2]
+        graph_reddit_gcc.edges("caffeine", data="count"),
+        key=lambda x: x[2],
+        reverse=True,
     )
 
     top_edges_rows = []
@@ -153,7 +155,7 @@ def reddit_substance(substance_name):
             ),
         )
 
-    top_edges_table = children = (
+    top_edges_table = dbc.Table(
         [
             html.Thead(
                 html.Tr(
@@ -166,6 +168,9 @@ def reddit_substance(substance_name):
             ),
             html.Tbody(top_edges_rows),
         ],
+        borderless=True,
+        striped=True,
+        hover=True,
     )
 
     table = dbc.Table(
@@ -202,7 +207,7 @@ def reddit_substance(substance_name):
                     html.Tr(
                         [
                             html.Th("Average post length (in characters)"),
-                            html.Td(f"{total_length/len(nodedata['ids'])}"),
+                            html.Td(f"{total_length/len(nodedata['ids']):.2f}"),
                         ]
                     ),
                 ]
@@ -228,18 +233,19 @@ def reddit_substance(substance_name):
             post_text = "[no content]"
         contents_paragraph.append(post_text)
 
-        preview_children += [html.P(contents_paragraph)]
+        preview_children += [html.P(contents_paragraph, style={"margin-bottom": "5px"})]
         preview_children += [
             html.A(
                 "View on reddit",
                 href=f"https://www.reddit.com/r/Nootropics/comments/{post_id}",
-            )
+            ),
+            html.Hr(),
         ]
     children = [
         dbc.Col(
             preview_children,
-            width=6,
+            width=8,
         ),
-        dbc.Col(children=[table], width=4),
+        dbc.Col(children=[table, top_edges_table], width=4),
     ]
     return [titlechildren, children]

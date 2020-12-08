@@ -15,8 +15,8 @@ app.layout = html.Div(
             children=[
                 dbc.NavLink("Home", href="/page-1", id="page-1-link"),
                 dbc.NavLink("Preliminary Analysis", href="/page-2", id="page-2-link"),
-                dbc.NavLink("Communities", href="/page-4", id="page-4-link"),
-                dbc.NavLink("Text Analysis", href="/page-5", id="page-5-link"),
+                dbc.NavLink("Communities", href="/page-3", id="page-3-link"),
+                dbc.NavLink("Text Analysis", href="/page-4", id="page-4-link"),
             ],
             brand="Nootropics & Graphs",
             color="primary",
