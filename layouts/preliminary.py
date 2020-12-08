@@ -13,9 +13,6 @@ from project.library_functions import (
 from app import app
 from utils.data import (
     all_names_and_synonyms,
-    synonym_mapping,
-    graph_reddit,
-    graph_wiki_directed,
 )
 from utils.preliminary import wiki_page, reddit_substance
 
@@ -194,6 +191,8 @@ preliminary_layout = html.Div(
 )
 def display_hover_data(clickdata):
     children = []
+    if not clickdata:
+        return []
     clicked_plot = clickdata["points"][0]["curveNumber"]
     # return str(clickdata)
     selected_bucket_pages = get_name_by(clickdata["points"][0]["pointNumbers"][:5])
@@ -270,6 +269,8 @@ def display_hover_data(clickdata):
 )
 def display_hover_data(clickdata):
     children = []
+    if not clickdata:
+        return []
     clicked_plot = clickdata["points"][0]["curveNumber"]
     # return str(clickdata)
     # selected_bucket_pages = get_name_by(clickdata["points"][0]["pointNumbers"][:5])

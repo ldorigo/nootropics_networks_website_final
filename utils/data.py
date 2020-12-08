@@ -10,8 +10,6 @@ from project.library_functions import (
     get_wiki_synonyms_mapping,
     load_data_reddit,
 )
-from project.library_functions.config import Config
-import networkx as nx
 import wojciech as w
 
 reddit_data = load_data_reddit()

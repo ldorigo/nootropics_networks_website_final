@@ -4,7 +4,7 @@ from .lexical_diversity import lexical_diversity
 from .nvc import nvc
 from .plot_conditional_frequency_distribution import \
     plot_conditional_frequency_distribution
-from .plot_wordcloud import plot_wordcloud
+# from .plot_wordcloud import plot_wordcloud
 from .plot_word_frequency_vs_rank import plot_word_frequency_vs_rank
 from .remove_stopwords import remove_stopwords
 from .stress import stress
