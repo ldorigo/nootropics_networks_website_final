@@ -81,7 +81,7 @@ homepage_explainer_card = dbc.Card(
             ),
             dbc.CardLink(
                 children="Open on nbviewer",
-                href="https://nbviewer.jupyter.org/github/wojciechdk/Social_Graphs_and_Interactions_Final_Project/blob/master/explainer_notebook/explainer_notebook.ipynb",
+                href="https://nbviewer.jupyter.org/github/wojciechdk/Social_Graphs_and_Interactions_Final_Project/blob/master/explainer_notebook/explainer_nb.ipynb",
             ),
         ]
     )

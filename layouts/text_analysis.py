@@ -166,7 +166,7 @@ text_analysis_layout = html.Div(
             dbc.CardBody(
                 [
                     html.H4(
-                        "Try your own: enter the nootropic you're interested in to see the associated wordcloud.",
+                        "Try your own: enter the nootropic you're interested in to see the associated wordcloud and sentiment distributions.",
                         className="card-title",
                     ),
                     dbc.Container(
