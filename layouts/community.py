@@ -151,7 +151,7 @@ community_layout = html.Div(
         ),
         html.H4("Wikipedia Communities"),
         html.P(
-            "To get a feel for how this works, let's start by looking at the communities that are detected on WikiPedia.\
+            "To get a feel for how this works, let's start by looking at the communities that are detected on Wikipedia.\
             The dataset is simpler (much fewer links), and we found that the separation into communities was much clearer."
         ),
         dbc.Container(
@@ -241,7 +241,7 @@ community_layout = html.Div(
         html.H4("Reddit Communities"),
         html.P(
             "Here comes one of the main questions we had when setting out to analyse our data: can we actually derive information about the underlying properties of nootropics\
-            starting from just reddit discussions? The following visualization is similar to the above, except here all links are extracted by finding nootropics that are mentionned together in reddit posts.",
+            starting from just Reddit discussions? The following visualization is similar to the above, except here all links are extracted by finding nootropics that are mentionned together in Reddit posts.",
             className="mb-5",
         ),
         dbc.Container(
@@ -320,7 +320,7 @@ community_layout = html.Div(
                                                         html.Em("random network"),
                                                         " than to a ",
                                                         html.Em("scale-free network"),
-                                                        ' like the WikiPedia network above. While it is still possible to find "nicer" layouts than what you see above, the python \
+                                                        ' like the Wikipedia network above. While it is still possible to find "nicer" layouts than what you see above, the python \
                                                 implementation of the force-atlas 2 algorithm is quite limited, and that is the best that we were able to do. \
                                                 Once more, you are invited to chose different coloring schemes to see the effects of automatic community detection.',
                                                     ]
@@ -404,7 +404,7 @@ def display_wiki_graph_info(value):
                         "Psychoactive drugs by mechanism of action",
                         href="https://en.wikipedia.org/wiki/Category:Psychoactive_drugs_by_mechanism_of_action",
                     ),
-                    " are the two main WikiPedia categories by which the substances can be categorized. \
+                    " are the two main Wikipedia categories by which the substances can be categorized. \
                     As you can see, the ForceAtlas algorithm shows that these categories are quite well represented \
                     in the way that the nodes link to each other: looking at the coloring by effect, stimulants are all on top, \
                     Psycholeptics are on the bottom-left, etc. Interestingly, there is a big cluster of nodes on the right that have no category:\
@@ -545,7 +545,7 @@ def display_reddit_graph_info(value):
             html.H4("Wikipedia Categories... again"),
             html.P(
                 children=[
-                    "Out of curiosity, we tried to color the nodes on the extracted reddit network by using the categories that we took from wikipedia. The \
+                    "Out of curiosity, we tried to color the nodes on the extracted Reddit network by using the categories that we took from wikipedia. The \
                     idea was that if the network structure reflected those categories, they would appear as spatially well-defined areas in the network.\
                     As you can see, the results were mixed: when coloring by",
                     html.Em("mechanism of action"),

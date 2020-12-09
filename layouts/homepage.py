@@ -24,7 +24,7 @@ reddit_table = dbc.Table(
                 ),
                 html.Tr([html.Th("Average post length"), html.Td("426 Characters")]),
                 html.Tr(
-                    [html.Th("Average Nootropics mentions per post"), html.Td("1")]
+                    [html.Th("Average nootropics mentions per post"), html.Td("1.95")]
                 ),
                 html.Tr(
                     [html.Th("Number of posts with 2+ nootropics"), html.Td("23.361")]
@@ -47,12 +47,12 @@ wiki_table = dbc.Table(
         html.Tbody(
             [
                 html.Tr([html.Th("Number of Pages"), html.Td("1.502")]),
-                html.Tr([html.Th("Total Size of the Dataset"), html.Td("~10MB")]),
+                html.Tr([html.Th("Total Size of the Dataset"), html.Td("~10 MB")]),
                 html.Tr(
                     [
                         html.Th("Recorded Variables"),
                         html.Td(
-                            "Name (title), Categories', Content', Links, Redirects (synonyms), URL"
+                            "Name (title), Categories, Content, Links, Redirects (synonyms), URL"
                         ),
                     ]
                 ),
@@ -104,7 +104,7 @@ website_repo_card = dbc.Card(
     dbc.CardBody(
         [
             html.H5("GitHub Repository (Website)", className="card-title"),
-            html.P("The sources of this website."),
+            html.P("The source code of this website."),
             dbc.CardLink(
                 children="Open on GitHub",
                 href="https://github.com/ldorigo/nootropics_network_website_final",
@@ -112,25 +112,13 @@ website_repo_card = dbc.Card(
         ]
     )
 )
-wojciech_repo_card = dbc.Card(
-    dbc.CardBody(
-        [
-            html.H5("Wojciech's Package", className="card-title"),
-            html.P("Functions and tools used for our analysis."),
-            dbc.CardLink(
-                children="Open on GitHub",
-                href="https://github.com/wojciechdk/python_package",
-            ),
-        ]
-    )
-)
+
 link_cards = dbc.Row(
     dbc.CardDeck(
         children=[
             homepage_explainer_card,
             homepage_repo_card,
             website_repo_card,
-            wojciech_repo_card,
         ]
     )
 )
@@ -160,7 +148,7 @@ ref_table = dbc.Row(
                                         href="https://github.com/barrust/mediawiki",
                                     )
                                 ),
-                                html.Td("Scraping and parsing of WikiPedia content"),
+                                html.Td("Scraping and parsing of Wikipedia content"),
                             ]
                         ),
                         html.Tr(
@@ -220,6 +208,17 @@ ref_table = dbc.Row(
                                 html.Td("Sentiment and Subjectivity Analysis"),
                             ]
                         ),
+                        html.Tr(
+                            [
+                                html.Th(
+                                    html.A(
+                                        "Networkx",
+                                        href="https://networkx.org",
+                                    )
+                                ),
+                                html.Td("Network manipulation and analysis"),
+                            ]
+                        ),
                     ]
                 ),
             ],
@@ -247,7 +246,7 @@ linkref_container = dbc.Container(
 homepage_layout = html.Div(
     [
         html.H1(
-            "Nootropic Networks: What can WikiPedia and Reddit teach us about smart drugs?".title(),
+            "Nootropic Networks: What can Wikipedia and Reddit teach us about smart drugs?".title(),
             className="mb-5",
         ),
         html.Blockquote(
@@ -273,7 +272,7 @@ homepage_layout = html.Div(
                 substances are often much less studied and understood than typical (medical) drugs: \
                 because they aim at improving performance of healthy people, rather than curing disease, there is little funding for large-scale studies or clinical trials.\
                 With this project, we want to explore some of the ways that network science and text analysis can help infer information on the uses and effects of nootropics.\
-                We apply the same network and text analysis tools to an encyclopedic source of knowledge - WikiPedia - and to a vast amount of posts on a community in the social network Reddit, ",
+                We apply the same network and text analysis tools to an encyclopedic source of knowledge - Wikipedia - and to a vast amount of posts on a community in the social network Reddit, ",
                 html.A("r/Nootropics", href="https://www.reddit.com/r/nootropics"),
                 " - to see what, if anything, can be learned.",
             ]
@@ -282,7 +281,7 @@ homepage_layout = html.Div(
             [
                 "At the same time, from a sligthly more theoretical and network-science point-of-view, we are interested in investigating the ",
                 html.Em("networks "),
-                'that can be extracted from these two sources: In both cases, the nodes of the network are nootropics. In the case of WikiPedia, we build the network by \
+                'that can be extracted from these two sources: In both cases, the nodes of the network are nootropics. In the case of Wikipedia, we build the network by \
                 considering "links" to be a link between two pages about two nootropics. In the case of Reddit, a "link" arises whenever two substances are mentionned together within a post. \
                     How do the resulting networks compare to each other, and why?',
             ]
@@ -293,12 +292,11 @@ homepage_layout = html.Div(
             [
                 "Here's a quick overview of the data we are analyzing. \
                 For more info, refer to the Jupyter notebook linked below. \
-                All of our datasets can be downloaded from our GitHub repository, in the ",
+            All of our datasets can be downloaded from our ",
                 html.A(
-                    html.Em("shared_data"),
-                    href="https://github.com/wojciechdk/Social_Graphs_and_Interactions_Final_Project/tree/master/shared_data",
+                    html.Em("GitHub repository, in the data directory."),
+                    href="https://github.com/wojciechdk/Social_Graphs_and_Interactions_Final_Project/tree/master/data",
                 ),
-                " directory.",
             ]
         ),
         dbc.Container(dbc.Row([dbc.Col(reddit_table), dbc.Col(wiki_table)])),

@@ -23,15 +23,15 @@ preliminary_layout = html.Div(
     [
         html.H2("Preliminary Analysis"),
         html.P(
-            "Let's get a quick overview of our data, from both wikipedia and Reddit."
+            "Let's get a quick overview of our data, from both Wikipedia and Reddit."
         ),
         html.Hr(className="my-3"),
         html.H3("Wikipedia Pages"),
         html.P(
-            "All our further analysis is based on the data we extracted from WikiPedia, so it's worth taking a deeper look at it."
+            "All our further analysis is based on the data we extracted from Wikipedia, so it's worth taking a deeper look at it."
         ),
         html.P(
-            "The data we took from WikiPedia consists of around 1.500 articles, \
+            "The data we took from Wikipedia consists of around 1.500 articles, \
             corresponding roughly to pages under two main categories: dietary \
             supplements, and psychoactive drugs. Let's look at the \
             distributions of some of the page's attributes."
@@ -60,7 +60,7 @@ preliminary_layout = html.Div(
             className="my-5",
         ),
         html.P(
-            "To get a better feel for what the WikiPedia data looks like, you can look up the data for any substance you like below."
+            "To get a better feel for what the Wikipedia data looks like, you can look up the data for any substance you like below."
         ),
         dbc.Card(
             dbc.CardBody(
@@ -212,35 +212,46 @@ def display_hover_data(clickdata):
         )
         tables = [
             make_table_from_items(
-                get_top("length", 5), "Longest Pages (n. of characters)"
+                get_top("length", 5), "Shortest Pages (amount of characters)"
             ),
             make_table_from_items(
-                get_top("length", 5, reverse=True), "Shortest Pages (n. of characters)"
+                get_top("length", 5, reverse=True),
+                "Longest Pages (amount of characters)",
             ),
         ]
     elif clicked_plot == 1:
         children.append(
             html.P(
-                "This is the count of links <b> towards other nootropics <b> that were found in each page. The amount of links is slightly more spread out, although the vast majority of pages as three or less links towards other nootropics. It's worth noting that 364 pages have no outgoing links at all."
+                [
+                    "This is the count of links",
+                    html.B("towards other nootropics "),
+                    "that were found in each page. The amount of links is slightly more spread out, although the vast majority of pages has three or less links towards other nootropics. It's worth noting that 364 pages have no outgoing links at all.",
+                ]
             )
         )
         tables = [
-            make_table_from_items(get_top("links", 5), "Pages with most links"),
+            make_table_from_items(get_top("links", 5), "Pages with fewest links"),
             make_table_from_items(
-                get_top("links", 5, reverse=True), "Pages with fewest links"
+                get_top("links", 5, reverse=True), "Pages with most links"
             ),
         ]
     elif clicked_plot == 2:
         children.append(
             html.P(
-                "Synonyms were extracted by looking at which pages redirect to this page: if, for instance, <i> Vitamin B12 </i> redirects to <i> Cobalamin </i>, we can use that information to map all text mentions of the former to the latter page. \
-                Once again, the number of synonyms per page is very skewed - more than a third of all pages have either one or no synonyms."
+                [
+                    "Synonyms were extracted by looking at which pages redirect to this page: if, for instance, ",
+                    html.Em("Vitamin B12"),
+                    "redirects to",
+                    html.Em("Cobalamin"),
+                    "we can use that information to map all text mentions of the former to the latter page. \
+                Once again, the number of synonyms per page is very skewed - more than a third of all pages have either one or no synonyms.",
+                ]
             )
         )
         tables = [
-            make_table_from_items(get_top("synonyms", 5), "Pages with most synonyms"),
+            make_table_from_items(get_top("synonyms", 5), "Pages with fewest synonyms"),
             make_table_from_items(
-                get_top("synonyms", 5, reverse=True), "Pages with fewest synonyms"
+                get_top("synonyms", 5, reverse=True), "Pages with most synonyms"
             ),
         ]
     elif clicked_plot == 3:
@@ -251,10 +262,10 @@ def display_hover_data(clickdata):
         )
         tables = [
             make_table_from_items(
-                get_top("categories", 5), "Pages with most categories"
+                get_top("categories", 5), "Pages with fewest categories"
             ),
             make_table_from_items(
-                get_top("categories", 5, reverse=True), "Pages with fewest categories"
+                get_top("categories", 5, reverse=True), "Pages with most categories"
             ),
         ]
 

@@ -28,7 +28,7 @@ def assign_louvain_communities(
         wiki_graph (nx.Graph, optional): Wikipedia graph. Defaults to None.
         reddit_edge_weight (str, optional): edge attribute to use for weighting. Defaults to "count".
         others_threshold (int, optional): minimum size of the communities. Communities smaller than this are mapped to "other". Defaults to 2.
-        louvain_resolution_reddit (float, optional): granularity for the louvain algorithm on the reddit graph. Defaults to 1
+        louvain_resolution_reddit (float, optional): granularity for the louvain algorithm on the Reddit graph. Defaults to 1
     Returns:
         Union[nx.Graph, Tuple[nx.Graph, nx.Graph]]: [description]
     """
@@ -40,7 +40,7 @@ def assign_louvain_communities(
             wiki_graph,
         )
 
-    # Iterate over reddit nodes to assign communities
+    # Iterate over Reddit nodes to assign communities
     for node in reddit_graph:
         # Iterate over all levels of the dendrogram
         for level in range(len(reddit_dendrogram) - 1):

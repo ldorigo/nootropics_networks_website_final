@@ -9,11 +9,11 @@ from project.library_functions import (
     get_wiki_page_names,
     get_wiki_synonyms_mapping,
     load_data_reddit,
-    load_data_wiki
+    load_data_wiki,
 )
 import wojciech as w
 
-print("Loading reddit and wikipedia data...")
+print("Loading Reddit and wikipedia data...")
 reddit_data = load_data_reddit()
 wiki_data = load_data_wiki()
 
@@ -25,7 +25,7 @@ graph_reddit = create_graph_reddit(
     min_content_length_in_characters=30,
     min_edge_occurrences_to_link=2,
     include_node_contents=True,
-    show_progress_bars=True
+    show_progress_bars=True,
 )
 
 graph_wiki_directed = create_graph_wiki()

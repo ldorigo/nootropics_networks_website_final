@@ -12,7 +12,7 @@ def get_wiki_plots_figure():
         rows=4,
         cols=1,
         subplot_titles=(
-            "Page Length (N. of Characters)",
+            "Page Length (Amount of Characters)",
             "Amount of Links per Page",
             "Amount of Synonyms (redirects) per Page",
             "Amount of Categories per Page",
@@ -23,7 +23,7 @@ def get_wiki_plots_figure():
             x=lf.get_page_lengths(),
             xbins_end=10000,
             xbins_size=500,
-            hovertemplate=f"Length (N. of Characters):  %{{x}} <br>Number of pages:  %{{y}}",
+            hovertemplate=f"Length (Amount of Characters):  %{{x}} <br>Number of pages:  %{{y}}",
         ),
         row=1,
         col=1,
@@ -78,7 +78,7 @@ def get_reddit_plots_figure():
         rows=2,
         cols=1,
         subplot_titles=(
-            "Post Length (N. of Characters)",
+            "Post Length (Amount of Characters)",
             "Amount of Nootropics Mentions per Post",
         ),
     )
@@ -86,7 +86,7 @@ def get_reddit_plots_figure():
         go.Histogram(
             x=lf.get_post_lengths(),
             xbins_end=2000,
-            hovertemplate=f"Length (N. of Characters):  %{{x}} <br>Number of posts:  %{{y}}",
+            hovertemplate=f"Length (Amount Characters):  %{{x}} <br>Number of posts:  %{{y}}",
         ),
         row=1,
         col=1,

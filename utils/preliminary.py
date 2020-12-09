@@ -108,7 +108,7 @@ def wiki_page(substance_name: str):
 
     preview_children.append(
         html.A(
-            html.B("Click here to view the page on WikiPedia."), href=nodedata["url"]
+            html.B("Click here to view the page on Wikipedia."), href=nodedata["url"]
         )
     )
     children = [
