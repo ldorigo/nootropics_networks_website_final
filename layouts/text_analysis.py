@@ -150,7 +150,7 @@ text_analysis_layout = html.Div(
                 ' information in these wordclouds - such as "2:1" (probably the ratio of caffeine to theanine).\
                  Despite not really being related to network science, this is perhaps the most interesting practical finding of this assignment:\
                 That it may be possible to infer statistics about the actual doses of specific substances that people take, and \
-                    possibly correlate those substances with the positivity of the outcomes.\
+                    possibly correlate those doses with the positivity of the outcomes.\
                 We are unfortunately lacking time to do so here, but this could be a great follow-up project.',
             ]
         ),

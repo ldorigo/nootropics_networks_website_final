@@ -292,8 +292,8 @@ homepage_layout = html.Div(
         html.P(
             [
                 "Here's a quick overview of the data we are analyzing. \
-            For more info, refer to the Jupyter notebook linked below. \
-            All of our datasets can be downloaded from our GitHub repository, in the ",
+                For more info, refer to the Jupyter notebook linked below. \
+                All of our datasets can be downloaded from our GitHub repository, in the ",
                 html.A(
                     html.Em("shared_data"),
                     href="https://github.com/wojciechdk/Social_Graphs_and_Interactions_Final_Project/tree/master/shared_data",
