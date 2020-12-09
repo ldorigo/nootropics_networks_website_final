@@ -59,7 +59,7 @@ wiki_table = dbc.Table(
                 html.Tr([html.Th("Average page length"), html.Td("4.798 Characters")]),
                 html.Tr(
                     [
-                        html.Th("Average number of links towards another nootropic"),
+                        html.Th("Average links to other nootropics"),
                         html.Td("2.77"),
                     ]
                 ),
@@ -79,7 +79,10 @@ homepage_explainer_card = dbc.Card(
             html.P(
                 "This is the notebook containing our more lengthy and technical analysis. Non-interactive, only for viewing."
             ),
-            dbc.CardLink(children="Open on nbviewer", href="TODO"),
+            dbc.CardLink(
+                children="Open on nbviewer",
+                href="https://nbviewer.jupyter.org/github/wojciechdk/Social_Graphs_and_Interactions_Final_Project/blob/master/explainer_notebook/explainer_notebook.ipynb",
+            ),
         ]
     )
 )
@@ -104,7 +107,7 @@ website_repo_card = dbc.Card(
             html.P("The sources of this website."),
             dbc.CardLink(
                 children="Open on GitHub",
-                href="https://github.com/ldorigo/nootropics_network_website",
+                href="https://github.com/ldorigo/nootropics_network_website_final",
             ),
         ]
     )
@@ -206,6 +209,17 @@ ref_table = dbc.Row(
                                 html.Td("Interactive network visualizations"),
                             ]
                         ),
+                        html.Tr(
+                            [
+                                html.Th(
+                                    html.A(
+                                        "TextBlob",
+                                        href="https://textblob.readthedocs.io/en/dev/",
+                                    )
+                                ),
+                                html.Td("Sentiment and Subjectivity Analysis"),
+                            ]
+                        ),
                     ]
                 ),
             ],
@@ -255,30 +269,37 @@ homepage_layout = html.Div(
                     "some studies",
                     href="https://www.scientificamerican.com/article/use-of-ldquo-smart-drugs-rdquo-on-the-rise/",
                 ),
-                " finding that up to 14% of the population uses them in some for or another. Despite their popularity, these\
-                substances are often much less studied and understood than the average (medical) drug: \
-                because they aim at improving healthy people, rather than curing disease, there is little funding for large-scale studies or clinical trials.\
-                With this project, we wanted to explore some of the ways that network science and text analysis could help infer information about the uses and effects of nootropics.\
-                We apply the same network and text analysis tools to an encyclopedic source of knowledge - WikiPedia - and to a vast amount of posts on ",
-                html.A("r/Nootropics", href="www.reddit.com/r/nootropics"),
-                " to see what, if anything, can be learned.",
+                " finding that up to 14% of the population uses them in one form or another. Despite their popularity, these\
+                substances are often much less studied and understood than typical (medical) drugs: \
+                because they aim at improving performance of healthy people, rather than curing disease, there is little funding for large-scale studies or clinical trials.\
+                With this project, we want to explore some of the ways that network science and text analysis can help infer information on the uses and effects of nootropics.\
+                We apply the same network and text analysis tools to an encyclopedic source of knowledge - WikiPedia - and to a vast amount of posts on a community in the social network Reddit, ",
+                html.A("r/Nootropics", href="https://www.reddit.com/r/nootropics"),
+                " - to see what, if anything, can be learned.",
             ]
         ),
         html.P(
             [
                 "At the same time, from a sligthly more theoretical and network-science point-of-view, we are interested in investigating the ",
                 html.Em("networks "),
-                """  """
-                'that can be extracted from both sources: In both cases, the nodes of the network are nootropics. In the case of WikiPedia, we build the network by \
+                'that can be extracted from these two sources: In both cases, the nodes of the network are nootropics. In the case of WikiPedia, we build the network by \
                 considering "links" to be a link between two pages about two nootropics. In the case of Reddit, a "link" arises whenever two substances are mentionned together within a post. \
-                    How do the resulting networks look like and why?',
+                    How do the resulting networks compare to each other, and why?',
             ]
         ),
         html.Hr(className="my-5"),
         html.H2("Our Data"),
         html.P(
-            "Here's a quick overview of the data we are analyzing. \
-            For more info, refer to the Jupyter notebook linked below."
+            [
+                "Here's a quick overview of the data we are analyzing. \
+            For more info, refer to the Jupyter notebook linked below. \
+            All of our datasets can be downloaded from our GitHub repository, in the ",
+                html.A(
+                    html.Em("shared_data"),
+                    href="https://github.com/wojciechdk/Social_Graphs_and_Interactions_Final_Project/tree/master/shared_data",
+                ),
+                " directory.",
+            ]
         ),
         dbc.Container(dbc.Row([dbc.Col(reddit_table), dbc.Col(wiki_table)])),
         html.Hr(className="my-5"),

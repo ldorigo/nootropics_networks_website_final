@@ -38,7 +38,7 @@ available_themes = [
 #     "https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css"
 # ]
 
-external_stylesheets = [MATERIA]
+external_stylesheets = [UNITED]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.config.suppress_callback_exceptions = True

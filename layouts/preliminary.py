@@ -33,8 +33,8 @@ preliminary_layout = html.Div(
         html.P(
             "The data we took from WikiPedia consists of around 1.500 articles, \
             corresponding roughly to pages under two main categories: dietary \
-                supplements, and psychoactive drugs. Let's look at the \
-                    distributions of some of the page's attributes."
+            supplements, and psychoactive drugs. Let's look at the \
+            distributions of some of the page's attributes."
         ),
         dbc.Card(
             dbc.CardBody(

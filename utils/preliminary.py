@@ -70,7 +70,7 @@ def wiki_page(substance_name: str):
     titlechildren.append(
         html.H5(f"Wikipedia Entry: {name}".title(), className="card-title")
     )
-    if name != substance_name:
+    if name.lower() != substance_name.lower():
         titlechildren.append(
             html.P(
                 html.Em(f"(redirected from: {substance_name})"), className="text-muted"
