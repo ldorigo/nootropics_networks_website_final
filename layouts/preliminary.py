@@ -145,7 +145,8 @@ preliminary_layout = html.Div(
         html.P(
             "In order to analyze the posts we got from reddit, we had to find as many mentions of nootropics in those posts as possible.\
                 If you're interested in learning more about how we did, feel free to check our notebook - the link is on the homepage.\
-            This allowed us to get, for each substance, a list of all posts that metion it. Once more, you can look at the data for any substance you like below.",
+            Detecting mentions allowed us to get both the list of nootropics mentioned in each post, and the list of posts that mention each nootropic. \
+                Once more, you can look at the data for any substance you like below.",
             className="mt-5",
         ),
         dbc.Card(
@@ -321,7 +322,7 @@ def display_hover_data(clickdata):
                     "The distribution of the number of mentions of nootropics that were found in each post. \
                 Again, very skewed, with almost half of all post having no mentions at all, and around a \
                 third having only one mention. Since the relations between nootropics can only be extracted \
-                when two or more substances are mentionned, this means that there are only around 25.000 posts that are effectively used in the analysis.\
+                when two or more substances are mentioned, this means that there are only around 25.000 posts that are effectively used in the analysis.\
                 As you can see from looking at the posts with most links, they are almost all ",
                     html.Em("lists"),
                     " rather than actual posts that mention many substances.\

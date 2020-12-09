@@ -282,7 +282,7 @@ homepage_layout = html.Div(
                 "At the same time, from a sligthly more theoretical and network-science point-of-view, we are interested in investigating the ",
                 html.Em("networks "),
                 'that can be extracted from these two sources: In both cases, the nodes of the network are nootropics. In the case of Wikipedia, we build the network by \
-                considering "links" to be a link between two pages about two nootropics. In the case of Reddit, a "link" arises whenever two substances are mentionned together within a post. \
+                considering "links" to be a link between two pages about two nootropics. In the case of Reddit, a "link" arises whenever two substances are mentioned together within a post. \
                     How do the resulting networks compare to each other, and why?',
             ]
         ),

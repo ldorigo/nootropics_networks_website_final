@@ -67,7 +67,7 @@ cyto_graph_reddit = cyto.Cytoscape(
     layout={"name": "preset"},
     responsive=True,
     zoom=0.3,
-    minZoom=0.1,
+    minZoom=0.3,
     maxZoom=3,
     style={"width": "100%", "height": "500pt"},
     stylesheet=stylesheet_reddit,
@@ -138,14 +138,14 @@ community_layout = html.Div(
             children=[
                 "Finding",
                 html.Em(" Communities "),
-                ": which substances are often mentionned together?".title(),
+                ": which substances are often mentioned together?".title(),
             ]
         ),
         html.P(
             "Now that we have looked at how the graphs are built, we can get to the meat of it: actually analyzing usage patterns."
         ),
         html.P(
-            "Our idea is that by looking at which nootropics are most often mentionned together,\
+            "Our idea is that by looking at which nootropics are most often mentioned together,\
             it may possible to derive information about what the most popular combinations of \
                 nootropics are, and how they relate to one another."
         ),
@@ -179,7 +179,7 @@ community_layout = html.Div(
                                                                         "value": "none",
                                                                     },
                                                                     {
-                                                                        "label": "Wikipedia Categories",
+                                                                        "label": "Wikipedia Categories:",
                                                                         "value": "wikicats",
                                                                         "disabled": True,
                                                                     },
@@ -192,12 +192,12 @@ community_layout = html.Div(
                                                                         "value": "effect",
                                                                     },
                                                                     {
-                                                                        "label": "Autodetected Communities",
+                                                                        "label": "Autodetected Communities:",
                                                                         "value": "auto",
                                                                         "disabled": True,
                                                                     },
                                                                     {
-                                                                        "label": "Louvain Categories - Top Level",
+                                                                        "label": "Louvain Categories",
                                                                         "value": "louvain_1",
                                                                     },
                                                                 ],
@@ -241,7 +241,7 @@ community_layout = html.Div(
         html.H4("Reddit Communities"),
         html.P(
             "Here comes one of the main questions we had when setting out to analyse our data: can we actually derive information about the underlying properties of nootropics\
-            starting from just Reddit discussions? The following visualization is similar to the above, except here all links are extracted by finding nootropics that are mentionned together in Reddit posts.",
+            starting from just Reddit discussions? The following visualization is similar to the one above, except here all links are extracted by finding nootropics that are mentioned together in Reddit posts.",
             className="mb-5",
         ),
         dbc.Container(
@@ -269,7 +269,7 @@ community_layout = html.Div(
                                                                             "value": "none",
                                                                         },
                                                                         {
-                                                                            "label": "Wikipedia Categories",
+                                                                            "label": "Wikipedia Categories:",
                                                                             "value": "none",
                                                                             "disabled": True,
                                                                         },
@@ -282,7 +282,7 @@ community_layout = html.Div(
                                                                             "value": "effect",
                                                                         },
                                                                         {
-                                                                            "label": "Autodetected Communities (on reddit)",
+                                                                            "label": "Autodetected Communities (on reddit):",
                                                                             "value": "none",
                                                                             "disabled": True,
                                                                         },
@@ -314,7 +314,7 @@ community_layout = html.Div(
                                             children=[
                                                 html.P(
                                                     children=[
-                                                        "It's immediately clear that the clustering doesn't work as well in this case: most of the nodes form a big blob in the center.\
+                                                        "It's immediately clear that the layouting doesn't work as well as on wikipedia: most of the nodes form a big blob in the center.\
                                     There are several reasons to this, and the main one is that this graph is very densely connected - in network science terms, it's \
                                     closer to a ",
                                                         html.Em("random network"),
@@ -322,7 +322,7 @@ community_layout = html.Div(
                                                         html.Em("scale-free network"),
                                                         ' like the Wikipedia network above. While it is still possible to find "nicer" layouts than what you see above, the python \
                                                 implementation of the force-atlas 2 algorithm is quite limited, and that is the best that we were able to do. \
-                                                Once more, you are invited to chose different coloring schemes to see the effects of automatic community detection.',
+                                                Once more, you are invited to choose different coloring schemes to see the effects of automatic community detection.',
                                                     ]
                                                 )
                                             ],
@@ -422,7 +422,7 @@ def display_wiki_graph_info(value):
             html.H5("Comparing autodetected communities to wikipedia categories"),
             html.P(
                 children=[
-                    "The two 2-D histograms below show, for each detected community (L0-...),\
+                    "The two 2-D histograms below show, for each detected community \
                  the overlap of that community with each of the categories on wikipedia. \
                      "
                 ]
@@ -436,8 +436,8 @@ def display_wiki_graph_info(value):
                     html.Em("GABA receptor ligands"),
                     " and ",
                     html.Em("Monoamine releasing agents"),
-                    ". It's curious that these specific two categories were recognized by the algorithm - and it may be interesting, \
-                had we more time, to investigate why.",
+                    ". It's peculiar that these specific two categories were recognized by the algorithm -\
+                    and it may be interesting to investigate why as a future project.",
                 ]
             ),
             html.H6("Drugs by Psychological Effect"),
@@ -446,7 +446,7 @@ def display_wiki_graph_info(value):
                 children=[
                     "In this case, there is only one community and one category which were found to have a sizeable overlap: ",
                     html.Em("Stimulants"),
-                    ". Once more, we are unsure why this specific community was the only one to have a significan overlap - but it is interesting to see that there is at least ",
+                    ". Once more, we are unsure why this specific community was the only one to have a significant overlap - but it is interesting to see that there is at least ",
                     html.Em("some "),
                     "overlap between autodetected communities and existing categories of the corresponding nodes.",
                 ]
@@ -542,15 +542,15 @@ def display_reddit_graph_info(value):
         children = []
     elif value in ["effect", "mechanism"]:
         children = [
-            html.H4("Wikipedia Categories... again"),
+            html.H4("Wikipedia Categories... Again"),
             html.P(
                 children=[
                     "Out of curiosity, we tried to color the nodes on the extracted Reddit network by using the categories that we took from wikipedia. The \
                     idea was that if the network structure reflected those categories, they would appear as spatially well-defined areas in the network.\
                     As you can see, the results were mixed: when coloring by",
-                    html.Em("mechanism of action"),
+                    html.Em(" mechanism of action "),
                     "there is one large area that is covered by",
-                    html.Em("psychoanaleptics"),
+                    html.Em(" psychoanaleptics "),
                     ", but little else is visible (in fact, the rest of the network has mostly no category under this categorization).\
                     ",
                 ]
